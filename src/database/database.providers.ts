@@ -1,5 +1,6 @@
-import {Sequelize} from "sequelize-typescript";
-
+import { Sequelize } from 'sequelize-typescript';
+import { User } from '../users';
+import { Role, UserRoles } from '../roles';
 
 export const databaseProviders = [
     {
@@ -12,11 +13,11 @@ export const databaseProviders = [
                 username: process.env.POSTGRES_USER,
                 password: process.env.POSTGRES_PASSWORD,
                 database: process.env.POSTGRES_DB,
-                models: [],
+                models: [User, Role, UserRoles],
             });
-            // sequelize.addModels();
+            sequelize.addModels([User]);
             await sequelize.sync();
             return sequelize;
         },
     },
-]
+];
